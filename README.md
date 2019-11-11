@@ -26,7 +26,7 @@ This repository contains all the files for all the [Unifix servers](https://stea
 - You can use `sudo nano server_install` to do that
 - Run it with `sudo bash server_install`
 
-```
+```bash
 # Libs and apps
 dpkg --add-architecture i386
 apt-get update -y && apt-get upgrade -y
