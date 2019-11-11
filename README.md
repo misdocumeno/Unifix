@@ -78,6 +78,7 @@ printf '%s\n' \
 'rm ../server/left4dead2/motd.txt' \
 'cp -r * ../server/left4dead2/' \
 'git reset HEAD --hard' \
+'chmod -R 777 server' \
 > server_update
 chmod u+x server_update
 chmod -R 777 server
