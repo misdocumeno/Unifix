@@ -80,6 +80,7 @@ printf '%s\n' \
 'git reset HEAD --hard' \
 > server_update
 chmod u+x server_update
+chmod -R 777 server
 ```
 
 ### 2) Edit Configuration Files
