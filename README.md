@@ -56,7 +56,7 @@ chmod u+x server_start
 # Update script
 printf '%s\n' \
 '# For Unifix official servers' \
-'# Uncomment 9-12 lines if you are using it for your own server' \
+'# Uncomment 9-12 lines and comment 18-21 if you are using it for your own server' \
 'killall screen' \
 'cd Unifix' \
 'git pull' \
@@ -70,9 +70,12 @@ printf '%s\n' \
 'rm -rf ../server/left4dead2/addons/sourcemod/plugins/' \
 'rm -rf ../server/left4dead2/cfg/sourcemod/' \
 'rm -rf ../server/left4dead2/cfg/cfgogl/' \
-'rm  ../server/left4dead2/cfg/generalfixes.cfg' \
-'rm  ../server/left4dead2/cfg/sharedplugins.cfg' \
-'rm  ../server/left4dead2/addons/sourcemod/configs/admins_simple.ini' \
+'rm ../server/left4dead2/cfg/generalfixes.cfg' \
+'rm ../server/left4dead2/cfg/sharedplugins.cfg' \
+'rm ../server/left4dead2/addons/sourcemod/configs/admins_simple.ini' \
+'rm ../server/left4dead2/addons/sourcemod/configs/core.cfg' \
+'rm ../server/left4dead2/host.txt' \
+'rm ../server/left4dead2/motd.txt' \
 'cp -r * ../server/left4dead2/' \
 'git reset HEAD --hard' \
 > server_update
@@ -80,7 +83,7 @@ chmod u+x server_update
 ```
 
 ### 2) Edit Configuration Files
-- Edit `server/left4dead2/cfg/server.cfg` and set a proper hostname, rcon password, steam groups id and "sn_main_name" in line 78 (set the same as hostame)
+- Edit `server/left4dead2/cfg/server.cfg` and set a proper hostname, rcon password, steam groups id and "sn_main_name" in line 76 (set the same as hostame)
 - Edit `server/left4dead2/addons/sourcemod/configs/databeses.cfg` and set the mysql password
 - Edit `server/left4dead2/addons/sourcemod/configs/sourcebans/sourcebans.cfg` and set the sourcebans ServerID
 
