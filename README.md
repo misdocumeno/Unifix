@@ -83,7 +83,7 @@ chmod u+x server_update
 ```
 
 ### 2) Edit Configuration Files
-- Edit `server/left4dead2/cfg/server.cfg` and set a proper hostname, rcon password, steam groups id and "sn_main_name" in line 78 (set the same as hostame)
+- Edit `server/left4dead2/cfg/server.cfg` and set a proper hostname, rcon password, steam groups id and "sn_main_name" in line 76 (set the same as hostame)
 - Edit `server/left4dead2/addons/sourcemod/configs/databeses.cfg` and set the mysql password
 - Edit `server/left4dead2/addons/sourcemod/configs/sourcebans/sourcebans.cfg` and set the sourcebans ServerID
 
