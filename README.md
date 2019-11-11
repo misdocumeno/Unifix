@@ -72,6 +72,7 @@ printf '%s\n' \
 'rm -rf ../server/left4dead2/cfg/cfgogl/' \
 'rm  ../server/left4dead2/cfg/generalfixes.cfg' \
 'rm  ../server/left4dead2/cfg/sharedplugins.cfg' \
+'rm  ../server/left4dead2/addons/sourcemod/configs/admins_simple.ini' \
 'cp -r * ../server/left4dead2/' \
 'git reset HEAD --hard' \
 > server_update
