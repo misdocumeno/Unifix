@@ -4,11 +4,11 @@ This repository contains all the files for all the [Unifix servers](https://stea
 ### Configs
 - ZoneMod 1.9.5
 - NextMod 1.0.4
-- SkeetMod 0.0.1
+- SkeetMod 0.0.2
 - Promod Elite 1.1
 - Equilibrium 3.0c
 - OpenMod 2
-- SavageMod
+- SavageMod 0.0.3
 - Scavhunt
 - Scavogl
 - HardCoop
