@@ -58,7 +58,7 @@ chmod u+x server_start
 # Edit these files instead of the server ones
 # This will be copied to the server directory when update
 mkdir -p serverconfigs/cfg/
-cp Unifix/cfg/server.cfg serverconfigs/cfg
+cp Unifix/cfg/server.cfg serverconfigs/cfg/
 mkdir -p server/addons/sourcemod/configs/sourcebans/
 cp Unifix/addons/sourcemod/configs/sourcebans/sourcebans.cfg serverconfigs/addons/sourcemod/configs/sourcebans/
 cp Unifix/addons/sourcemod/configs/databases.cfg serverconfigs/addons/sourcemod/configs/
