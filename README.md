@@ -73,6 +73,7 @@ printf '%s\n' \
 'rm -rf ../server/left4dead2/cfg/cfgogl/' \
 'rm ../server/left4dead2/cfg/generalfixes.cfg' \
 'rm ../server/left4dead2/cfg/sharedplugins.cfg' \
+'rm ../server/left4dead2/cfg/server.cfg' \
 'rm ../server/left4dead2/host.txt' \
 'rm ../server/left4dead2/motd.txt' \
 'cp -r * ../server/left4dead2/' \
