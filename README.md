@@ -36,9 +36,9 @@ apt-get install -y lib32z1
 apt-get install -y git
 
 # Install steam and L4D2
-chmod -R 777 .
 wget http://media.steampowered.com/installer/steamcmd_linux.tar.gz
 tar -xvzf steamcmd_linux.tar.gz
+chmod -R 777 .
 ./steamcmd.sh << STEAM
 login anonymous
 force_install_dir ./server
