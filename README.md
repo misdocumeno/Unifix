@@ -59,7 +59,7 @@ chmod u+x server_start
 # This will be copied to the server directory when update
 mkdir -p serverconfigs/cfg/
 cp Unifix/cfg/server.cfg serverconfigs/cfg/
-mkdir -p server/addons/sourcemod/configs/sourcebans/
+mkdir -p serverconfigs/addons/sourcemod/configs/sourcebans/
 cp Unifix/addons/sourcemod/configs/sourcebans/sourcebans.cfg serverconfigs/addons/sourcemod/configs/sourcebans/
 cp Unifix/addons/sourcemod/configs/databases.cfg serverconfigs/addons/sourcemod/configs/
 
