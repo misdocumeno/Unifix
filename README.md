@@ -20,11 +20,10 @@ This repository contains all the files for all the [Unifix servers](https://stea
 - A clean installation of **Ubuntu 18.04**
 - A user with **sudo** privileges
 
-### 1) Install steam, L4D2 server and clone this repository
-- Login as any user with sudo privileges
-- Put the script below in a file named `server_install`
-- You can use `nano server_install` to do that
-- Run it with `sudo bash server_install`
+### 1) Install libraries and git
+- Login as root or any user with sudo privileges and put the script below in a file named `server_pre`
+- You can use `nano server_pre` to do that
+- Run it with `bash server_pre` **(`sudo bash server_pre` if you aren't logged in as root)**
 
 ```bash
 # Libs and apps
@@ -34,11 +33,17 @@ apt-get install -y libc6:i386
 apt-get install -y lib32gcc1
 apt-get install -y lib32z1
 apt-get install -y git
+```
 
+### 2) Install steam, L4D2 server and clone this repository
+- Login as the user that will start the server
+- Put the script below in a file named `server_install`
+- Run it with `bash server_install`
+
+```bash
 # Install steam and L4D2
 wget http://media.steampowered.com/installer/steamcmd_linux.tar.gz
 tar -xvzf steamcmd_linux.tar.gz
-chmod -R 777 .
 ./steamcmd.sh << STEAM
 login anonymous
 force_install_dir ./server
@@ -81,20 +86,17 @@ printf '%s\n' \
 'cd ..' \
 'cd serverconfigs' \
 'cp -r * ../server/left4dead2/' \
-'cd ..' \
-'chmod -R 777 server' \
 > server_update
 chmod u+x server_update
-chmod -R 777 server
 ```
 
-### 2) Edit Configuration Files
+### 3) Edit Configuration Files
 - Edit `serverconfigs/cfg/server.cfg` and set a proper hostname, rcon password, steam groups id and "sn_main_name" in line 76 (set the same as hostame)
 - Edit `serverconfigs/addons/sourcemod/configs/databeses.cfg` and set the mysql password
 - Edit `serverconfigs/addons/sourcemod/configs/sourcebans/sourcebans.cfg` and set the sourcebans ServerID
 
-### 3) Start the Server
+### 4) Start the Server
 - Run the server with `bash server_start`
 
-### 4) Update
-- Update server files when necessary using `sudo bash server_update`
+### 5) Update
+- Update server files when necessary using `bash server_update`
