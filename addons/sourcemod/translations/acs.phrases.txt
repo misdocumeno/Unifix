@@ -82,11 +82,11 @@
 	"The next map is currently"
 	{
 		"#format"		"{1:s}"
-		"en"			"The next map is currently: {1}."
+		"en"			"{blue}[{default}!{blue}]{default} The next map is currently {1}"
 	}
 	"The next campaign is currently"
 	{
 		"#format"		"{1:s}"
-		"en"			"The next campaign is currently: {1}."
+		"en"			"{blue}[{default}!{blue}]{default} The next campaign is currently {1}"
 	}
 }
