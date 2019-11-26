@@ -149,5 +149,12 @@
 		{
 			"name" "Gauntlet Survival"
 		}
+	}
+	"Zonemod MAPS"
+	{
+		"zmmp"
+		{
+			"name" "4v4 ZoneMod MAPS"
+		}
 	}	
 }
