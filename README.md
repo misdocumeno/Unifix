@@ -65,6 +65,8 @@ chmod u+x server_start
 # This will be copied to the server directory when update
 mkdir -p serverconfigs/cfg/
 cp Unifix/cfg/server.cfg serverconfigs/cfg/
+mkdir -p serverconfigs/cfg/sourcemod/
+cp Unifix/cfg/sourcemod/vpn_ip.cfg serverconfigs/cfg/sourcemod/vpn_ip.cfg
 mkdir -p serverconfigs/addons/sourcemod/configs/sourcebans/
 cp Unifix/addons/sourcemod/configs/sourcebans/sourcebans.cfg serverconfigs/addons/sourcemod/configs/sourcebans/
 cp Unifix/addons/sourcemod/configs/databases.cfg serverconfigs/addons/sourcemod/configs/
@@ -77,6 +79,7 @@ printf '%s\n' \
 'rm -rf ../server/left4dead2/addons/sourcemod/' \
 'rm -rf ../server/left4dead2/cfg/sourcemod/' \
 'rm -rf ../server/left4dead2/cfg/cfgogl/' \
+'rm -rf ../server/left4dead2/cfg/stripper/' \
 'rm ../server/left4dead2/cfg/generalfixes.cfg' \
 'rm ../server/left4dead2/cfg/sharedplugins.cfg' \
 'rm ../server/left4dead2/cfg/server.cfg' \
@@ -86,6 +89,10 @@ printf '%s\n' \
 'git reset HEAD --hard' \
 'cd ..' \
 'cd serverconfigs' \
+'rm ../server/left4dead2/cfg/server.cfg' \
+'rm ../server/left4dead2/cfg/sourcemod/vpn_ip.cfg' \
+'rm ../server/left4dead2/cfg/sourcemod/configs/databases.cfg' \
+'rm ../server/left4dead2/cfg/sourcemod/configs/sourcebans/sourcebans.cfg' \
 'cp -r * ../server/left4dead2/' \
 > server_update
 chmod u+x server_update
