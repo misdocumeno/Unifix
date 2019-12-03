@@ -23,7 +23,7 @@
 	{
 		"savagemod"
 		{
-			"name" "SavageMod 0.0.5"
+			"name" "SavageMod 0.1.0"
 		}
 	}
 	"NextMod Configs"
@@ -42,7 +42,7 @@
 		}
 		"nextmod"
 		{
-			"name" "NextMod 1.0.4"
+			"name" "NextMod 1.0.5"
 		}
 		"nextmodpug"
 		{
@@ -65,7 +65,7 @@
 		}
 		"skeetmod"
 		{
-			"name" "SkeetMod v0.0.2"
+			"name" "SkeetMod v0.0.3"
 		}
 	}
 	"Promod Configs"
