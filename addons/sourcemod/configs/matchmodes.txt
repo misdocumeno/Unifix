@@ -23,7 +23,7 @@
 	{
 		"savagemod"
 		{
-			"name" "SavageMod 0.1.0"
+			"name" "SavageMod 1.0.1"
 		}
 	}
 	"NextMod Configs"
