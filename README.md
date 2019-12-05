@@ -2,13 +2,13 @@
 This repository contains all the files for all the [Unifix servers](https://steamcommunity.com/groups/UnifixServers).
 
 ### Configs
-- ZoneMod 1.9.5
-- NextMod 1.0.4
+- ZoneMod 1.9.6
+- NextMod 1.0.5
 - SkeetMod 0.0.3
 - Promod Elite 1.1
 - Equilibrium 3.0c
 - OpenMod 2
-- SavageMod 0.1.0
+- SavageMod 1.0.1
 - Scavhunt
 - Scavogl
 - HardCoop
