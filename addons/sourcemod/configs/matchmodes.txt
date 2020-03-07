@@ -68,11 +68,11 @@
 			"name" "SkeetMod v0.0.3"
 		}
 	}
-	"Promod Configs"
+	"ProMod Configs"
 	{
 		"pmelite"
 		{
-			"name" "Promod Elite 1.1"
+			"name" "ProMod Elite 1.1"
 		}
 	}
 	"EQ Configs"
@@ -150,11 +150,11 @@
 			"name" "Gauntlet Survival"
 		}
 	}
-	"Zonemod MAPS"
+	"VeteranMod Configs"
 	{
-		"zmmp"
+		"veteranmod"
 		{
-			"name" "4v4 ZoneMod MAPS"
+			"name" "VeteranMod 1.2"
 		}
 	}	
 }
