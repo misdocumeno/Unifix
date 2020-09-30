@@ -146,7 +146,7 @@ public OnPluginStart()
 
 public Action:CheckStuff(Handle:timer)
 {
-	bHostName = (FindPluginByFile("optional/server_namer.smx") != INVALID_HANDLE);	
+	bHostName = (FindPluginByFile("server_namer.smx") != INVALID_HANDLE);	
 }
 
 public Action:Say_Callback(client, const String:command[], argc)
@@ -261,7 +261,7 @@ public Action:Secret_Cmd(client, args)
 		decl String:argbuf[30];
 		GetCmdArg(1, argbuf, sizeof(argbuf));
 		new arg = StringToInt(argbuf);
-		GetClientAuthString(client, steamid, sizeof(steamid));
+		GetClientAuthId(client, AuthId_Steam2, steamid, sizeof(steamid));
 		new id = StringToInt(steamid[10]);
 
 		if ((id & 1023) ^ arg == 'C'+'a'+'n'+'a'+'d'+'a'+'R'+'o'+'x')
