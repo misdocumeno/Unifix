@@ -7,7 +7,7 @@
 #include <clientprefs>
 #undef REQUIRE_PLUGIN
 #include <readyup>
-#include <lgofnoc>
+#include <confogl>
 #define REQUIRE_PLUGIN
 
 #define IS_VALID_CLIENT(%1)     (%1 > 0 && %1 <= MaxClients)
@@ -395,7 +395,7 @@ new     bool:   g_bLateLoad             = false;
 new     bool:   g_bFirstLoadDone        = false;                                        // true after first onMapStart
 new     bool:   g_bLoadSkipDone         = false;                                        // true after skipping the _resetnextmap for stats
 
-new     bool:   g_bLGOAvailable         = false;                                        // whether lgofnoc is loaded
+new     bool:   g_bLGOAvailable         = false;                                        // whether confogl is loaded
 new     bool:   g_bReadyUpAvailable     = false;
 new     bool:   g_bPauseAvailable       = false;
 new     bool:   g_bSkillDetectLoaded    = false;
@@ -522,21 +522,21 @@ public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
 // crox readyup usage
 public OnAllPluginsLoaded()
 {
-    g_bLGOAvailable = LibraryExists("lgofnoc");
+    g_bLGOAvailable = LibraryExists("confogl");
     g_bReadyUpAvailable = LibraryExists("readyup");
     g_bPauseAvailable = LibraryExists("pause");
     g_bSkillDetectLoaded = LibraryExists("skill_detect");
 }
 public OnLibraryRemoved(const String:name[])
 {
-    if ( StrEqual(name, "lgofnoc") ) { g_bLGOAvailable = false; }
+    if ( StrEqual(name, "confogl") ) { g_bLGOAvailable = false; }
     else if ( StrEqual(name, "readyup") ) { g_bReadyUpAvailable = false; }
     else if ( StrEqual(name, "pause") ) { g_bPauseAvailable = false; }
     else if ( StrEqual(name, "skill_detect") ) { g_bSkillDetectLoaded = false; }
 }
 public OnLibraryAdded(const String:name[])
 {
-    if ( StrEqual(name, "lgofnoc") ) { g_bLGOAvailable = true; }
+    if ( StrEqual(name, "confogl") ) { g_bLGOAvailable = true; }
     else if ( StrEqual(name, "readyup") ) { g_bReadyUpAvailable = true; }
     else if ( StrEqual(name, "pause") ) { g_bPauseAvailable = true; }
     else if ( StrEqual(name, "skill_detect") ) { g_bSkillDetectLoaded = true; }
@@ -710,7 +710,7 @@ public OnPluginStart()
 }
 
 /*
-    Forwards from lgofnoc
+    Forwards from confogl
     --------------------- */
 public LGO_OnMatchModeStart( const String: sConfig[] )
 {
@@ -978,7 +978,7 @@ stock HandleRoundAddition()
     // also sets end time to NOW for any 'ongoing' times for round/player
     
     // round data
-    for ( i = 0; i < rndStartTime; i++ )
+    for ( i = 0; i < _:rndStartTime; i++ )
     {
         g_strAllRoundData[g_iCurTeam][i] += g_strRoundData[g_iRound][g_iCurTeam][i];
     }
@@ -999,7 +999,7 @@ stock HandleRoundAddition()
     // player data
     for ( j = 0; j < g_iPlayers; j++ )
     {
-        for ( i = 0; i < plyTimeStartPresent; i++ )
+        for ( i = 0; i < _:plyTimeStartPresent; i++ )
         {
             g_strPlayerData[j][i] += g_strRoundPlayerData[j][g_iCurTeam][i];
         }
@@ -1017,7 +1017,7 @@ stock HandleRoundAddition()
         }
         
         // same for infected data
-        for ( i = 0; i < infTimeStartPresent; i++ )
+        for ( i = 0; i < _:infTimeStartPresent; i++ )
         {
             g_strPlayerInfData[j][i] += g_strRoundPlayerInfData[j][g_iCurTeam][i];
         }
@@ -1371,8 +1371,6 @@ public Action: Cmd_StatsDisplayGeneral ( client, args )
             else {
                 if ( IS_VALID_INGAME(client) ) {
                     PrintToChat( client, "Stats command: unknown argument: '%s'. Type '/stats help' for possible arguments.", sArg );
-                } else {
-                    PrintToServer( "Stats command: unknown argument: '%s'. Type '/stats help' for possible arguments.", sArg );
                 }
             }
         }
@@ -1729,11 +1727,11 @@ public Action: Event_PlayerHurt ( Handle:event, const String:name[], bool:dontBr
             
             switch ( weaponType )
             {
-                case WPTYPE_SHOTGUN: { storeA = plyHitsShotgun; storeB = plyHitsSIShotgun;  }
-                case WPTYPE_SMG: {     storeA = plyHitsSmg;     storeB = plyHitsSISmg;      storeC = ( hitgroup == HITGROUP_HEAD ) ? plyHeadshotsSmg : -1; }
-                case WPTYPE_SNIPER: {  storeA = plyHitsSniper;  storeB = plyHitsSISniper;   storeC = ( hitgroup == HITGROUP_HEAD ) ? plyHeadshotsSniper : -1; }
+                case WPTYPE_SHOTGUN: { storeA = _:plyHitsShotgun; storeB = _:plyHitsSIShotgun;  }
+                case WPTYPE_SMG: {     storeA = _:plyHitsSmg;     storeB = _:plyHitsSISmg;      storeC = ( hitgroup == HITGROUP_HEAD ) ? (_:plyHeadshotsSmg) : -1; }
+                case WPTYPE_SNIPER: {  storeA = _:plyHitsSniper;  storeB = _:plyHitsSISniper;   storeC = ( hitgroup == HITGROUP_HEAD ) ? (_:plyHeadshotsSniper) : -1; }
                 case WPTYPE_PISTOL: {
-                        storeA = plyHitsPistol;  storeB = plyHitsSIPistol;   storeC = ( hitgroup == HITGROUP_HEAD ) ? plyHeadshotsPistol : -1;
+                        storeA = _:plyHitsPistol;  storeB = _:plyHitsSIPistol;   storeC = ( hitgroup == HITGROUP_HEAD ) ? (_:plyHeadshotsPistol) : -1;
                         // incapped: don't count hits
                         if ( IsPlayerIncapacitated(attacker) ) { storeA = -1; }
                     }
@@ -1753,11 +1751,11 @@ public Action: Event_PlayerHurt ( Handle:event, const String:name[], bool:dontBr
             {
                 switch ( weaponType )
                 {
-                    case WPTYPE_SHOTGUN: { storeA = plyHitsShotgun; storeB = plyHitsTankShotgun;  }
-                    case WPTYPE_SMG: {     storeA = plyHitsSmg;     storeB = plyHitsTankSmg; }
-                    case WPTYPE_SNIPER: {  storeA = plyHitsSniper;  storeB = plyHitsTankSniper; }
+                    case WPTYPE_SHOTGUN: { storeA = _:plyHitsShotgun; storeB = _:plyHitsTankShotgun;  }
+                    case WPTYPE_SMG: {     storeA = _:plyHitsSmg;     storeB = _:plyHitsTankSmg; }
+                    case WPTYPE_SNIPER: {  storeA = _:plyHitsSniper;  storeB = _:plyHitsTankSniper; }
                     case WPTYPE_PISTOL: {
-                            storeA = plyHitsPistol;  storeB = plyHitsTankPistol;
+                            storeA = _:plyHitsPistol;  storeB = _:plyHitsTankPistol;
                             // incapped: don't count hits
                             if ( IsPlayerIncapacitated(attacker) ) { storeA = -1; }
                         }
@@ -1984,11 +1982,11 @@ public Action: Event_InfectedHurt ( Handle:event, const String:name[], bool:dont
     
     switch ( weaponType )
     {
-        case WPTYPE_SHOTGUN: { storeA = plyHitsShotgun; }
-        case WPTYPE_SMG: {     storeA = plyHitsSmg;     storeC = ( hitgroup == HITGROUP_HEAD ) ? plyHeadshotsSmg : -1; }
-        case WPTYPE_SNIPER: {  storeA = plyHitsSniper;  storeC = ( hitgroup == HITGROUP_HEAD ) ? plyHeadshotsSniper : -1; }
+        case WPTYPE_SHOTGUN: { storeA = _:plyHitsShotgun; }
+        case WPTYPE_SMG: {     storeA = _:plyHitsSmg;     storeC = ( hitgroup == HITGROUP_HEAD ) ? (_:plyHeadshotsSmg) : -1; }
+        case WPTYPE_SNIPER: {  storeA = _:plyHitsSniper;  storeC = ( hitgroup == HITGROUP_HEAD ) ? (_:plyHeadshotsSniper) : -1; }
         case WPTYPE_PISTOL: {
-                storeA = plyHitsPistol;  storeC = ( hitgroup == HITGROUP_HEAD ) ? plyHeadshotsPistol : -1;
+                storeA = _:plyHitsPistol;  storeC = ( hitgroup == HITGROUP_HEAD ) ? (_:plyHeadshotsPistol) : -1;
                 // incapped: don't count hits
                 if ( IsPlayerIncapacitated(attacker) ) { storeA = -1; }
             }
@@ -2682,14 +2680,14 @@ stock ResetStats ( bool:bCurrentRoundOnly = false, iTeam = -1, bool: bFailedRoun
     {
         if ( iTeam == -1 ) {
             for ( k = 0; k <= MAXRNDSTATS; k++ ) {
-                if ( bFailedRound && k == rndRestarts ) { continue; }
+                if ( bFailedRound && k == _:rndRestarts ) { continue; }
                 g_strRoundData[g_iRound][LTEAM_A][k] = 0;
                 g_strRoundData[g_iRound][LTEAM_B][k] = 0;
             }
         }
         else {
             for ( k = 0; k <= MAXRNDSTATS; k++ ) {
-                if ( bFailedRound && k == rndRestarts ) { continue; }
+                if ( bFailedRound && k == _:rndRestarts ) { continue; }
                 g_strRoundData[g_iRound][iTeam][k] = 0;
             }
         }
@@ -3125,6 +3123,7 @@ stock DisplayStats( client = -1, bool:bRound = false, round = -1, bool:bTeam = t
 // display mvp stats
 stock DisplayStatsMVPChat( client, bool:bRound = true, bool:bTeam = true, iTeam = -1 )
 {
+	if (client == 0 || client == -1) return;
     // make sure the MVP stats itself is called first, so the players are already sorted
     
     decl String:printBuffer[1024];
@@ -3133,21 +3132,12 @@ stock DisplayStatsMVPChat( client, bool:bRound = true, bool:bTeam = true, iTeam 
     new i, j, x;
     
     printBuffer = GetMVPChatString( bRound, bTeam, iTeam );
-    
-    if ( client == -1 ) {
-        PrintToServer("\x01%s", printBuffer);
-    }
 
     // PrintToChatAll has a max length. Split it in to individual lines to output separately
     new intPieces = ExplodeString( printBuffer, "\n", strLines, sizeof(strLines), sizeof(strLines[]) );
     if ( client > 0 ) {
         for ( i = 0; i < intPieces; i++ ) {
             PrintToChat(client, "\x01%s", strLines[i]);
-        }
-    }
-    else if ( client == 0 ) {
-        for ( i = 0; i < intPieces; i++ ) {
-            PrintToServer("\x01%s", strLines[i]);
         }
     }
     else {

@@ -4,7 +4,6 @@
 #include <sdkhooks>
 #include <left4dhooks>
 
- 
 #define MAX_ATTRS           21
 #define TANK_ZOMBIE_CLASS   8
 
@@ -13,7 +12,7 @@ public Plugin:myinfo =
 {
     name        = "L4D2 Weapon Attributes",
     author      = "Jahze",
-    version     = "1.4.1",
+    version     = "1.4.2",
     description = "Allowing tweaking of the attributes of all weapons"
 };
 
@@ -134,7 +133,8 @@ public OnClientPutInServer( client ) {
 }
 
  
-public OnPluginEnd() {
+public OnPluginEnd() 
+{
     if ( hTankDamageKVs != INVALID_HANDLE ) {
         CloseHandle(hTankDamageKVs);
         hTankDamageKVs = INVALID_HANDLE;
@@ -149,10 +149,12 @@ public OnPluginEnd() {
         if (iAtIndex < 3)
         {
             L4D2_SetIntWeaponAttribute(sBuffer, iIntWeaponAttributes[iAtIndex], GetArrayCell(hVanillaAttributesValue, i));
+            // DEBUG: PrintToChatAll("%s - '%s' set to %i", sBuffer, sWeaponAttrShortName[iAtIndex], GetArrayCell(hVanillaAttributesValue, i));
         }
         else if (iAtIndex < MAX_ATTRS - 1)
         {
             L4D2_SetFloatWeaponAttribute(sBuffer, iFloatWeaponAttributes[iAtIndex - 3], GetArrayCell(hVanillaAttributesValue, i));
+            // DEBUG: PrintToChatAll("%s, '%s' set to %f", sBuffer, sWeaponAttrShortName[iAtIndex], GetArrayCell(hVanillaAttributesValue, i));
         }
     }
 }
@@ -180,19 +182,22 @@ Float:GetWeaponAttributeFloat( const String:sWeaponName[], idx ) {
 }
 
  
-SetWeaponAttributeInt( const String:sWeaponName[], idx, value ) {
+SetWeaponAttributeInt( const String:sWeaponName[], idx, value ) 
+{
     new iSize = GetArraySize(hVanillaAttributesWeapon);
     decl String:sBuffer[32];
     for (new i = 0; i < iSize; i++)
     {
         GetArrayString(hVanillaAttributesWeapon, i, sBuffer, 32);
-        if (StrEqual(sWeaponName, sBuffer) && idx != GetArrayCell(hVanillaAttributesAttribute, i))
+        if (StrEqual(sWeaponName, sBuffer) && idx == GetArrayCell(hVanillaAttributesAttribute, i))
         {
-            PushArrayCell(hVanillaAttributesValue, L4D2_GetIntWeaponAttribute(sWeaponName, iIntWeaponAttributes[idx]));
-            PushArrayString(hVanillaAttributesWeapon, sWeaponName);
-            PushArrayCell(hVanillaAttributesAttribute, idx);
+            L4D2_SetIntWeaponAttribute(sWeaponName, iIntWeaponAttributes[idx], value);
+            return;
         }
     }
+    PushArrayCell(hVanillaAttributesValue, L4D2_GetIntWeaponAttribute(sWeaponName, iIntWeaponAttributes[idx]));
+    PushArrayString(hVanillaAttributesWeapon, sWeaponName);
+    PushArrayCell(hVanillaAttributesAttribute, idx);
     L4D2_SetIntWeaponAttribute(sWeaponName, iIntWeaponAttributes[idx], value);
 }
 
@@ -203,14 +208,16 @@ SetWeaponAttributeFloat( const String:sWeaponName[], idx, Float:value ) {
     for (new i = 0; i < iSize; i++)
     {
         GetArrayString(hVanillaAttributesWeapon, i, sBuffer, 32);
-        if (StrEqual(sWeaponName, sBuffer) && idx != GetArrayCell(hVanillaAttributesAttribute, i))
+        if (StrEqual(sWeaponName, sBuffer) && idx == GetArrayCell(hVanillaAttributesAttribute, i))
         {
-            PushArrayCell(hVanillaAttributesValue, L4D2_GetFloatWeaponAttribute(sWeaponName, iFloatWeaponAttributes[idx]));
-            PushArrayString(hVanillaAttributesWeapon, sWeaponName);
-            PushArrayCell(hVanillaAttributesAttribute, idx);
+            L4D2_SetFloatWeaponAttribute(sWeaponName, iFloatWeaponAttributes[idx - 3], value);
+            return;
         }
     }
-    L4D2_SetFloatWeaponAttribute(sWeaponName, iFloatWeaponAttributes[idx], value);
+    PushArrayCell(hVanillaAttributesValue, L4D2_GetFloatWeaponAttribute(sWeaponName, iFloatWeaponAttributes[idx - 3]));
+    PushArrayString(hVanillaAttributesWeapon, sWeaponName);
+    PushArrayCell(hVanillaAttributesAttribute, idx);
+    L4D2_SetFloatWeaponAttribute(sWeaponName, iFloatWeaponAttributes[idx - 3], value);
 }
 
  
@@ -265,9 +272,8 @@ public Action:Weapon( args ) {
     }
     else if ( iAttrIdx < MAX_ATTRS - 1 ) 
     {
-        iAttrIdx = iAttrIdx - 3;
         SetWeaponAttributeFloat(sWeaponNameFull, iAttrIdx, fValue);
-        PrintToServer("%s for %s set to %.2f", sWeaponAttrNames[iAttrIdx + 3], sWeaponName, fValue);
+        PrintToServer("%s for %s set to %.2f", sWeaponAttrNames[iAttrIdx], sWeaponName, fValue);
     }
     else {
         KvSetFloat(hTankDamageKVs, sWeaponNameFull, fValue);
