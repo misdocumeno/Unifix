@@ -3,6 +3,10 @@ This repository contains all the files for all the [Unifix servers](https://stea
 
 ### Configs
 - ZoneMod 1.9.9
+- NextMod 1.0.5
+- ProMod Elite 1.1
+- Equilibrium 3.0c
+- Apex 1.1.2
 
 
 ## Install Steps
